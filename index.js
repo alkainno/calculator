@@ -1,33 +1,66 @@
 var queue = [];
 var input = 0;
+
 function calculateQueue(value) {
   if (input !== 0) {
     input = parseFloat(input);
-
     addToQueue(input);
   }
-  var answer = value[0];
-  var dividedByZero = 0;
-  for (var i = 2; i < value.length; i = i + 2) {
-    switch (queue[i - 1]) {
-      case "/":
-        if (value[i] === 0) dividedByZero = 1;
-        else answer = answer / value[i];
-        break;
-      case "*":
-        answer = answer * value[i];
-        break;
+
+  var stack = [];
+  // for (var i = 0; i < value.length; i++) {
+  //   if (value[i] === "(") {
+  //     stack.push(i);
+  //   } else if (value[i] === ")") {
+  //     var start = stack.pop();
+  //     var subValue = value.slice(start + 1, i);
+  //     var subResult = calculateQueue(subValue);
+  //     value.splice(start, i - start + 1, subResult);
+  //     i = start;
+  //   }
+  // }
+
+  // for (var i = 0; i < value.length; i++) {
+  //   if (value[i] === "^") {
+  //     var base = parseFloat(value[i - 1]);
+  //     var exponent = parseFloat(value[i + 1]);
+  //     var result = Math.pow(base, exponent);
+  //     value.splice(i - 1, 3, result);
+  //     i--;
+  //   }
+  // }
+
+  for (var i = 0; i < value.length; i++) {
+    if (value[i] === "/") {
+      var divisor = parseFloat(value[i + 1]);
+      var result = value[i - 1] / divisor;
+      value.splice(i - 1, 3, result);
+      i--;
+    } else if (value[i] === "*") {
+      var multiplier = parseFloat(value[i + 1]);
+      var result = value[i - 1] * multiplier;
+      value.splice(i - 1, 3, result);
+      i--;
+    }
+  }
+
+  var answer = parseFloat(value[0]);
+  for (var i = 1; i < value.length; i += 2) {
+    var operator = value[i];
+    var operand = parseFloat(value[i + 1]);
+    switch (operator) {
       case "+":
-        answer += value[i];
+        answer += operand;
         break;
       case "-":
-        answer -= value[i];
+        answer -= operand;
         break;
     }
   }
-  answer = answer.toFixed(10);
+
+  answer = answer.toFixed(20);
   answer = parseFloat(answer);
-  if (dividedByZero === 1) {
+  if (isNaN(answer) || !isFinite(answer)) {
     clearAll();
     document.getElementById("answer").innerHTML = "NaN";
   } else {
@@ -35,10 +68,14 @@ function calculateQueue(value) {
     input = answer;
     queue = [];
   }
+
+  return answer;
 }
+
 function addToQueue(input) {
   queue.push(input);
 }
+
 function clearAll() {
   queue = [];
   input = 0;
@@ -53,7 +90,10 @@ function numericButton(arg) {
     document.getElementById("answer").innerHTML = "";
   }
   if (!(arg === ".") || !String(input).match(/[.]/)) {
-    if (document.getElementById("answer").innerHTML !== "0") {
+    if (
+      document.getElementById("answer").innerHTML !== "0" &&
+      document.getElementById("answer").innerHTML === "NaN"
+    ) {
       arg = arg === "." ? "0." : arg;
     }
 
@@ -61,24 +101,6 @@ function numericButton(arg) {
     document.getElementById("answer").innerHTML += arg;
   }
 }
-// function numericButton(arg) {
-//     if (
-//       document.getElementById("answer").innerHTML === "NaN" ||
-//       (document.getElementById("answer").innerHTML == "0" && arg != ".")
-//     ) {
-//       document.getElementById("answer").innerHTML = "";
-//     }
-
-//     if (!(arg === ".") || !String(input).match(/[.]/)) {
-//       // Check if the previous input was an operator
-//       if (isNaN(input) && input !== "-") {
-//         document.getElementById("answer").innerHTML += "0";
-//       }
-
-//       input += arg;
-//       document.getElementById("answer").innerHTML += arg;
-//     }
-//   }
 
 function operatorButton(arg) {
   if (input !== 0 && input !== "-") {
@@ -90,7 +112,6 @@ function operatorButton(arg) {
   }
   if (arg == "-" && isNaN(queue[0]) && input !== "-") {
     input = "-";
-
     document.getElementById("answer").innerHTML = "-";
   }
 }
