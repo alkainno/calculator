@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="calculatorBody">
+        <div>
+            <span id="answer">0</span>
+        </div>
+        <div class="row">
+            <input type="button" id="cal_btn" onclick="operatorButton('+')" value="+" />
+            <input type="button" id="cal_btn" onclick="operatorButton('-')" value="-" />
+            <input type="button" id="cal_btn" onclick="operatorButton('*')" value="&times;" />
+            <input type="button" id="cal_btn" onclick="operatorButton('/')" value="&divide;" />
+        </div>
+        <div class="leftPanel">
+            <div class="row">
+                <input type="button" id="cal_btn" onclick="numericButton('7')" value="7" />
+                <input type="button" id="cal_btn" onclick="numericButton('8')" value="8" />
+                <input type="button" id="cal_btn" onclick="numericButton('9')" value="9" />
+
+            </div>
+            <div class="row">
+                <input type="button" id="cal_btn" onclick="numericButton('4')" value="4" />
+                <input type="button" id="cal_btn" onclick="numericButton('5')" value="5" />
+                <input type="button" id="cal_btn" onclick="numericButton('6')" value="6" />
+
+            </div>
+            <div class="row">
+                <input type="button" id="cal_btn" onclick="numericButton('1')" value="1" />
+                <input type="button" id="cal_btn" onclick="numericButton('2')" value="2" />
+                <input type="button" id="cal_btn" onclick="numericButton('3')" value="3" />
+
+            </div>
+            <div class="row">
+                <input type="button" id="cal_btn" onclick="numericButton('0')" value="0" />
+                <input type="button" id="cal_btn" class="dot" onclick="numericButton('.')" value="." />
+                <input id="C" type="button" onclick="clearAll()" value="C" />
+            </div>
+        </div>
+        <div class="equals-div">
+            <input type="button" id="equals" onclick="calculateQueue(queue)" value="=" />
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

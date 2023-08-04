@@ -1,0 +1,63 @@
+#calculatorBody {
+    width: 502px;
+    margin: 4% auto;
+    font-family: 'Source Sans Pro', sans-serif;
+    letter-spacing: 5px;
+    font-size: 1.8rem;
+    -webkit-user-select: none;
+    padding: 19px;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 1px;
+}
+
+#answer {
+    width: 474px;
+    display: inline-block;
+    font-family: 'Dosis', sans-serif;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+    min-height: 60px;
+    max-height: 200px;
+    padding-right: 15px;
+    padding-top: 10px;
+    text-align: right;
+    margin-right: 6px;
+    font-size: 2.5rem;
+    overflow-wrap: break-word;
+
+}
+
+input {
+    display: inline-block;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+    width: 108px;
+    text-align: center;
+    padding: 7px 14px;
+    margin: 15px 6px 10px 0;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    font-size: 33px;
+}
+
+#equals {
+    display: inline-block;
+    border: 1px solid #3079ED;
+    border-radius: 1px;
+    width: 22%;
+    text-align: center;
+    padding: 127px 10px;
+    margin: 10px 6px 10px 0;
+    vertical-align: top;
+    cursor: pointer;
+    color: #FFF;
+    background-color: #4d90fe;
+}
+
+.leftPanel {
+    display: inline-block;
+}
+
+.equals-div {
+    display: inline;
+}
